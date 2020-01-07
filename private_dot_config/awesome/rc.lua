@@ -18,6 +18,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Volume Control
 local volume_control = require("volume-control")
 
+{{- if eq .chezmoi-hostname "thinkpad" }}
+
 -- Battery
 local battery_widget = require("battery")
 local battery_widget_text = require("battery_text")
@@ -25,7 +27,7 @@ local battery_widget_text = require("battery_text")
 -- Backlight
 local brightness = require("brightness")
 
-
+{{- end }}
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
