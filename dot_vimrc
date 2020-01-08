@@ -6,3 +6,7 @@ colorscheme monokai
 
 set number
 set mouse=a
+
+set tabstop=4
+set softtabstop=0 noexpandtab
+set shiftwidth=4
