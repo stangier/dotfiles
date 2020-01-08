@@ -18,21 +18,20 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Volume Control
 local volume_control = require("volume-control")
 
-{{- if eq .chezmoi-hostname "thinkpad" }}
-
+{{- if eq .chezmoi.hostname "e480" }}
 -- Battery
 local battery_widget = require("battery")
 local battery_widget_text = require("battery_text")
 
 -- Backlight
 local brightness = require("brightness")
-
 {{- end }}
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
--- {{{ Error handling
+--  Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -57,7 +56,7 @@ do
 end
 -- }}}
 
--- {{{ Variable definitions
+-- Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/home/lorenz/.config/awesome/theme.lua")
 
@@ -94,7 +93,7 @@ awful.layout.layouts = {
 }
 -- }}}
 
--- {{{ Menu
+-- Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
@@ -123,7 +122,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
--- {{{ Wibar
+-- Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 local month_calendar = awful.widget.calendar_popup.month()
@@ -184,7 +183,10 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+{{- if eq .chezmoi.hostname "e480" }}
 brightness_ctrl = brightness({})
+{{- end }}
+
 volumecfg = volume_control({})
 
 awful.screen.connect_for_each_screen(function(s)
@@ -236,9 +238,11 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
+	    {{- if eq .chezmoi.hostname "work-laptop" }}
 	    battery_widget(),
-	    volumecfg.widget,
 	    brightness_ctrl.widget,
+            {{- end }}
+            volumecfg.widget,
             mytextclock,
             s.mylayoutbox,
         },
@@ -246,7 +250,7 @@ awful.screen.connect_for_each_screen(function(s)
 end)
 -- }}}
 
--- {{{ Mouse bindings
+-- Mouse bindings
 root.buttons(gears.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
@@ -254,7 +258,7 @@ root.buttons(gears.table.join(
 ))
 -- }}}
 
--- {{{ Key bindings
+-- Key bindings
 globalkeys = gears.table.join(
     awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
     awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
@@ -496,7 +500,7 @@ clientbuttons = gears.table.join(
 root.keys(globalkeys)
 -- }}}
 
--- {{{ Rules
+-- Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -561,7 +565,7 @@ awful.rules.rules = {
 }
 -- }}}
 
--- {{{ Signals
+-- Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
