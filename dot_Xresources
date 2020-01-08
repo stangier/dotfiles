@@ -1,0 +1,62 @@
+! Settings for XTERM
+xterm*VT100.Translations: #override \
+	Ctrl Shift <Key>V:	insert-selection(CLIPBOARD) \n\
+	Ctrl Shift <Key>C:	copy-selection(CLIPBOARD)
+
+xTerm.vt100.translations: #override \n\
+ 	Ctrl <Key> a: smaller-vt-font() \n\
+	Ctrl <Key> b: larger-vt-font()
+
+! Settings for URXVT
+! 	Font Settings
+	URxvt.font: xft:monaco:size=10
+	urxvt.perl-ext-common: default,resize-font
+
+!	Disable Scrollbar
+	URxvt.scrollBar: false
+
+!   	Enable Copy paste with shift
+	URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+	URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+!   	Disable old keybindings
+	URxvt.keysym.Control-Meta-c: builtin-string:
+	URxvt.keysym.Control-Meta-v: builtin-string:
+	URxvt.iso14755: false
+	URxvt.iso14755_52: false
+
+! special
+*.foreground:   #d7d0c7
+*.background:   #151515
+*.cursorColor:  #d7d0c7
+
+! black
+*.color0:       #101010
+*.color8:       #404040
+
+! red
+*.color1:       #e84f4f
+*.color9:       #d23d3d
+
+! green
+*.color2:       #b8d68c
+*.color10:      #a0cf5d
+
+! yellow
+*.color3:       #e1aa5d
+*.color11:      #f39d21
+
+! blue
+*.color4:       #7dc1cf
+*.color12:      #4e9fb1
+
+! magenta
+*.color5:       #9b64fb
+*.color13:      #8542ff
+
+! cyan
+*.color6:       #6d878d
+*.color14:      #42717b
+
+! white
+*.color7:       #dddddd
+*.color15:      #dddddd
