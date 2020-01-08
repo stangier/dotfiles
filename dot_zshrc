@@ -116,3 +116,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 alias blender28="~/Programme/blender-2.80-linux-glibc217-x86_64/blender"
+
+export EDITOR=vim
